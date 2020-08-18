@@ -10,18 +10,30 @@ class Book extends Component {
 
   render() {
     const { book, updateShelf } = this.props
+    const title = book.title ? book.title : 'Title not available',
+      authors = book.authors ? book.authors : [],
+      shelf = book.shelf ? book.shelf : 'none',
+      imageURL = (book.imageLinks && book.imageLinks.smallThumbnail)
+        ? book.imageLinks.smallThumbnail
+        : '';
 
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + book.imageLinks.smallThumbnail + ')' }}></div>
+          <div
+            className="book-cover"
+            style={{ width: 128, height: 193, backgroundImage: `url(${imageURL})` }}
+          />
 
-          <ShelfChanger currentShelf={book.shelf} updateShelf={(newShelf) => updateShelf(newShelf)} />
+          <ShelfChanger
+            currentShelf={shelf}
+            updateShelf={(newShelf) => updateShelf(newShelf)}
+          />
         </div>
 
-        <div className="book-title">{book.title}</div>
+        <div className="book-title">{title}</div>
 
-        {book.authors.map((author) => (
+        {authors.map((author) => (
           <div key={author} className="book-authors">{author}</div>
         ))}
       </div>

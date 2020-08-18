@@ -1,13 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import ListBooks from './ListBooks';
 
 class Search extends Component {
   state = {
-    query: ''
+    query: '',
+    books: []
   }
 
-  updateBooks = () => {
-    // TODO: add handler
+  updateBooks = (query) => {
+    this.setState(() => ({
+      query
+    }))
+
+    if(query !== "") {
+      BooksAPI.search(query)
+      .then((books) => {
+
+        if(!(books.error)){
+          this.setState(() => ({
+            books: books
+          }))
+        }
+      })
+    }
+  }
+
+  updateShelf = (book, newShelf) => {
+    let books = this.state.books.map((b)=> {
+      if(b.id === book.id) {
+        b.shelf = newShelf
+      }
+      return b
+    })
+
+    BooksAPI.update(book, newShelf)
+    .then(() => {
+        this.setState(() => ({
+          books: books
+        }))
+    })
   }
 
   render() {
@@ -19,25 +52,17 @@ class Search extends Component {
           </Link>
 
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             <input
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={() => this.updateBooks}
+              onChange={(event) => this.updateBooks(event.target.value)}
             />
 
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ListBooks books={this.state.books} updateShelf={(book, newShelf) => this.updateShelf(book, newShelf)} />
         </div>
       </div>
     )
