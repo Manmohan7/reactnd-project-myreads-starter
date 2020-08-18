@@ -12,11 +12,10 @@ class BookShelf extends Component {
   render() {
     let { title, shelf, books, updateShelf } = this.props
 
-    if(title) {
-      books = books.filter((book) => {
-        return book.shelf === shelf
-      })
-    }
+    // filter all books according to shelf
+    books = books.filter((book) => {
+      return book.shelf === shelf
+    })
 
     return (
       <div className="bookshelf">

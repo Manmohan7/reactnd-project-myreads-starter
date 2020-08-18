@@ -28,9 +28,18 @@ class Dashboard extends Component {
   }
 
   updateShelf = (book, newShelf) => {
-    this.setState(() => {
-
+    let books = this.state.books.map((b)=> {
+      if(b.id === book.id) {
+        b.shelf = newShelf
+      }
+      return b
     })
+
+    this.setState(() => ({
+      books
+    }))
+
+    BooksAPI.update(book, newShelf)
   }
 
   render() {
