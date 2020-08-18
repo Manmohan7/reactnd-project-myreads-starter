@@ -19,8 +19,8 @@ class Search extends Component {
     searchedBooks = searchedBooks.map((book) => {
       let bookFromShelf = this.props.allBooks.filter((b) => b.id === book.id)
       bookFromShelf.length
-      ? book.shelf = bookFromShelf[0].shelf
-      : book.shelf = 'none'
+        ? book.shelf = bookFromShelf[0].shelf
+        : book.shelf = 'none'
 
       return book
     })
@@ -35,14 +35,17 @@ class Search extends Component {
       query
     }))
 
-    if(query !== "") {
+    if (query !== "") {
       BooksAPI.search(query)
-      .then((books) => {
+        .then((books) => {
 
-        if(!(books.error)){
+          if (books.error) {
+            books = []
+          }
           this.mapBookShelf(books)
-        }
-      })
+        })
+    } else {
+      this.mapBookShelf([])
     }
   }
 
