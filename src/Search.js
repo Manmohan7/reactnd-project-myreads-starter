@@ -2,11 +2,32 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import ListBooks from './ListBooks';
+import PropTypes from 'prop-types'
 
 class Search extends Component {
+  static propTypes = {
+    allBooks: PropTypes.array.isRequired,
+    addToShelf: PropTypes.func.isRequired
+  }
+
   state = {
     query: '',
-    books: []
+    searchedBooks: []
+  }
+
+  mapBookShelf = (searchedBooks) => {
+    searchedBooks = searchedBooks.map((book) => {
+      let bookFromShelf = this.props.allBooks.filter((b) => b.id === book.id)
+      bookFromShelf.length
+      ? book.shelf = bookFromShelf[0].shelf
+      : book.shelf = 'none'
+
+      return book
+    })
+
+    this.setState(() => ({
+      searchedBooks
+    }))
   }
 
   updateBooks = (query) => {
@@ -19,31 +40,16 @@ class Search extends Component {
       .then((books) => {
 
         if(!(books.error)){
-          this.setState(() => ({
-            books: books
-          }))
+          this.mapBookShelf(books)
         }
       })
     }
   }
 
-  updateShelf = (book, newShelf) => {
-    let books = this.state.books.map((b)=> {
-      if(b.id === book.id) {
-        b.shelf = newShelf
-      }
-      return b
-    })
-
-    BooksAPI.update(book, newShelf)
-    .then(() => {
-        this.setState(() => ({
-          books: books
-        }))
-    })
-  }
-
   render() {
+    const { addToShelf } = this.props
+    const { searchedBooks, query } = this.state
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -55,14 +61,14 @@ class Search extends Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              value={this.state.query}
+              value={query}
               onChange={(event) => this.updateBooks(event.target.value)}
             />
 
           </div>
         </div>
         <div className="search-books-results">
-          <ListBooks books={this.state.books} updateShelf={(book, newShelf) => this.updateShelf(book, newShelf)} />
+          <ListBooks books={searchedBooks} updateShelf={(book, newShelf) => addToShelf(book, newShelf)} />
         </div>
       </div>
     )
