@@ -15,7 +15,7 @@ class Search extends Component {
     searchedBooks: []
   }
 
-  mapBookShelf = (searchedBooks) => {
+  mapBookShelf = (query, searchedBooks) => {
     searchedBooks = searchedBooks.map((book) => {
       let bookFromShelf = this.props.allBooks.filter((b) => b.id === book.id)
       bookFromShelf.length
@@ -25,9 +25,11 @@ class Search extends Component {
       return book
     })
 
-    this.setState(() => ({
-      searchedBooks
-    }))
+    if (this.state.query === query) {
+      this.setState(() => ({
+        searchedBooks
+      }))
+    }
   }
 
   updateBooks = (query) => {
@@ -35,18 +37,40 @@ class Search extends Component {
       query
     }))
 
-    if (query !== "") {
-      BooksAPI.search(query)
-        .then((books) => {
+    /**
+     * NOTE: Race condition handled
+     * by passing an empty promise
+     */
 
+    let newBooks = query === ""
+      ? Promise.resolve([])
+      : BooksAPI.search(query)
+
+    newBooks.then((books) => {
+      if (books.error) {
+        books = []
+      }
+
+      this.mapBookShelf(query, books)
+    })
+
+    /**
+     * NOTE: Another solution is to not call search API
+     * and simply pass empty array to ListBooks
+     */
+    /*
+    if (query !== "") {
+      BooksAPI.search
+        .then((books) => {
           if (books.error) {
             books = []
           }
-          this.mapBookShelf(books)
+
+          this.mapBookShelf(query, books)
         })
-    } else {
-      this.mapBookShelf([])
     }
+    */
+
   }
 
   render() {
