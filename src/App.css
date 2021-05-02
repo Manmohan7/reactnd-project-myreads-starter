@@ -120,6 +120,13 @@ button:active {
 
 .search-books-results {
   padding: 80px 10px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-books-initial-msg,
+.no-books-msg {
+  color: rgba(0,0,0,0.6);
 }
 
 /* books grid */

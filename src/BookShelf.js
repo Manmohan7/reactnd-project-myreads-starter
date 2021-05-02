@@ -20,7 +20,11 @@ class BookShelf extends Component {
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{title}</h2>
-        <ListBooks books={books} updateShelf={(book, newShelf) => updateShelf(book, newShelf)} />
+        {
+          books.length
+            ? (<ListBooks books={books} updateShelf={(book, newShelf) => updateShelf(book, newShelf)} />)
+            : (<p>No books on this shelf</p>)
+        }
       </div>
     )
   }

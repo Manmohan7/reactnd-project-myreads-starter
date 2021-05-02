@@ -95,7 +95,13 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ListBooks books={searchedBooks} updateShelf={(book, newShelf) => addToShelf(book, newShelf)} />
+          {
+            query === ""
+              ? (<p className="search-books-initial-msg">Start searching by typing above</p>)
+              : searchedBooks.length
+                ? <ListBooks books={searchedBooks} updateShelf={(book, newShelf) => addToShelf(book, newShelf)} />
+                : (<p className="no-books-msg">No books found!</p>)
+          }
         </div>
       </div>
     )
