@@ -2,7 +2,7 @@
   "name": "myreads-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://manmohan7.github.io/reactnd-project-myreads-starter/",
+  "homepage": "./",
   "dependencies": {
     "prop-types": "^15.7.2",
     "react": "^16.6.3",

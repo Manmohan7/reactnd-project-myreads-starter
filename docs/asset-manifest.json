@@ -1,14 +1,14 @@
 {
-  "main.css": "/reactnd-project-myreads-starter/static/css/main.24f469cc.chunk.css",
-  "main.js": "/reactnd-project-myreads-starter/static/js/main.ff9f9ed3.chunk.js",
-  "main.js.map": "/reactnd-project-myreads-starter/static/js/main.ff9f9ed3.chunk.js.map",
-  "static/js/1.309a2b2e.chunk.js": "/reactnd-project-myreads-starter/static/js/1.309a2b2e.chunk.js",
-  "static/js/1.309a2b2e.chunk.js.map": "/reactnd-project-myreads-starter/static/js/1.309a2b2e.chunk.js.map",
-  "runtime~main.js": "/reactnd-project-myreads-starter/static/js/runtime~main.83f7d75c.js",
-  "runtime~main.js.map": "/reactnd-project-myreads-starter/static/js/runtime~main.83f7d75c.js.map",
-  "static/media/App.css": "/reactnd-project-myreads-starter/static/media/arrow-drop-down.78c6f53b.svg",
-  "static/css/main.24f469cc.chunk.css.map": "/reactnd-project-myreads-starter/static/css/main.24f469cc.chunk.css.map",
-  "index.html": "/reactnd-project-myreads-starter/index.html",
-  "precache-manifest.055b25981466f573226a219361ca408f.js": "/reactnd-project-myreads-starter/precache-manifest.055b25981466f573226a219361ca408f.js",
-  "service-worker.js": "/reactnd-project-myreads-starter/service-worker.js"
+  "main.css": "./static/css/main.31e671c3.chunk.css",
+  "main.js": "./static/js/main.bfbc89fd.chunk.js",
+  "main.js.map": "./static/js/main.bfbc89fd.chunk.js.map",
+  "static/js/1.309a2b2e.chunk.js": "./static/js/1.309a2b2e.chunk.js",
+  "static/js/1.309a2b2e.chunk.js.map": "./static/js/1.309a2b2e.chunk.js.map",
+  "runtime~main.js": "./static/js/runtime~main.4a686d48.js",
+  "runtime~main.js.map": "./static/js/runtime~main.4a686d48.js.map",
+  "static/media/App.css": "./static/media/arrow-drop-down.78c6f53b.svg",
+  "static/css/main.31e671c3.chunk.css.map": "./static/css/main.31e671c3.chunk.css.map",
+  "index.html": "./index.html",
+  "precache-manifest.8e5afa3d13ad58c9b18e915dbc40a226.js": "./precache-manifest.8e5afa3d13ad58c9b18e915dbc40a226.js",
+  "service-worker.js": "./service-worker.js"
 }
